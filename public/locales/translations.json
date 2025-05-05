@@ -1,0 +1,287 @@
+{
+  "fr": {
+    "common": {
+      "home": "Accueil",
+      "search": "Rechercher",
+      "explore": "Explorer",
+      "seeAll": "Voir tout",
+      "addToCart": "Ajouter au panier",
+      "viewOffer": "Voir l'offre",
+      "backToHome": "Retour à l'accueil",
+      "readMore": "Lire la suite",
+      "subscribe": "S'inscrire",
+      "yourEmail": "Votre adresse email"
+    },
+    "navigation": {
+      "home": "Accueil",
+      "khalijiFrangrance": "Khaliji Fragrance",
+      "khalijiModel": "Khaliji Model",
+      "khalijiHiTech": "Khaliji Hi-Tech",
+      "about": "À propos",
+      "contact": "Contact",
+      "blog": "Blog"
+    },
+    "categories": {
+      "perfumes": "Parfums",
+      "incense": "Encens & Bakhoor",
+      "accessories": "Accessoires",
+      "all": "Tous les produits"
+    },
+    "productDetails": {
+      "description": "Description",
+      "specifications": "Spécifications",
+      "reviews": "Avis",
+      "relatedProducts": "Produits similaires",
+      "brand": "Marque",
+      "volume": "Volume",
+      "gender": "Genre",
+      "notes": "Notes",
+      "rating": "Évaluation",
+      "price": "Prix",
+      "originalPrice": "Prix original",
+      "discount": "Remise",
+      "inStock": "En stock",
+      "outOfStock": "Rupture de stock"
+    },
+    "gender": {
+      "men": "Hommes",
+      "women": "Femmes",
+      "unisex": "Unisexe"
+    },
+    "khalijiFrangrance": {
+      "hero": {
+        "title": "Découvrez l'Art des Parfums Orientaux",
+        "subtitle": "Explorez notre collection exclusive de parfums et produits de beauté inspirés par les traditions ancestrales du Golfe."
+      },
+      "searchPlaceholder": "Rechercher un parfum, une note, une marque...",
+      "categories": {
+        "perfumes": {
+          "title": "Parfums Orientaux",
+          "description": "Des fragrances exquises aux notes d'oud, de safran, de rose et d'ambre pour hommes et femmes."
+        },
+        "incense": {
+          "title": "Encens Traditionnels",
+          "description": "Encens traditionnels, bakhoor et brûleurs pour parfumer votre intérieur à la manière du Golfe."
+        },
+        "accessories": {
+          "title": "Accessoires de Parfumerie",
+          "description": "Brûleurs d'encens, coffrets cadeaux et accessoires pour une expérience parfumée complète."
+        }
+      },
+      "specialOffers": "Offres Spéciales",
+      "topRated": "Les Mieux Notés",
+      "heritage": {
+        "title": "L'Héritage des Parfums du Golfe",
+        "paragraph1": "Les parfums du Golfe sont réputés dans le monde entier pour leur richesse, leur complexité et leur longévité. Depuis des siècles, les habitants de la péninsule arabique ont perfectionné l'art de la parfumerie.",
+        "paragraph2": "L'oud, également connu sous le nom de bois d'agar, est l'un des ingrédients les plus précieux et emblématiques de la parfumerie orientale. Son arôme boisé, chaud et légèrement sucré est au cœur de nombreuses compositions.",
+        "paragraph3": "Chez Khaliji Fragrance, nous vous proposons une sélection des meilleurs parfums et produits de beauté inspirés par cette tradition ancestrale, adaptés aux goûts contemporains."
+      },
+      "partners": "Nos Marques Partenaires",
+      "blog": {
+        "title": "Conseils Beauté & Parfumerie",
+        "article1": {
+          "title": "Comment Choisir son Parfum Oriental",
+          "description": "Guide complet pour sélectionner le parfum oriental qui correspond à votre personnalité..."
+        },
+        "article2": {
+          "title": "Les Secrets de Beauté des Femmes du Golfe",
+          "description": "Découvrez les rituels de beauté ancestraux qui font la réputation des femmes du Moyen-Orient..."
+        }
+      },
+      "newsletter": {
+        "title": "Restez informé",
+        "description": "Inscrivez-vous à notre newsletter pour recevoir nos offres exclusives et nos conseils de parfumerie"
+      }
+    }
+  },
+  "en": {
+    "common": {
+      "home": "Home",
+      "search": "Search",
+      "explore": "Explore",
+      "seeAll": "See all",
+      "addToCart": "Add to cart",
+      "viewOffer": "View offer",
+      "backToHome": "Back to home",
+      "readMore": "Read more",
+      "subscribe": "Subscribe",
+      "yourEmail": "Your email address"
+    },
+    "navigation": {
+      "home": "Home",
+      "khalijiFrangrance": "Khaliji Fragrance",
+      "khalijiModel": "Khaliji Model",
+      "khalijiHiTech": "Khaliji Hi-Tech",
+      "about": "About",
+      "contact": "Contact",
+      "blog": "Blog"
+    },
+    "categories": {
+      "perfumes": "Perfumes",
+      "incense": "Incense & Bakhoor",
+      "accessories": "Accessories",
+      "all": "All products"
+    },
+    "productDetails": {
+      "description": "Description",
+      "specifications": "Specifications",
+      "reviews": "Reviews",
+      "relatedProducts": "Related Products",
+      "brand": "Brand",
+      "volume": "Volume",
+      "gender": "Gender",
+      "notes": "Notes",
+      "rating": "Rating",
+      "price": "Price",
+      "originalPrice": "Original price",
+      "discount": "Discount",
+      "inStock": "In stock",
+      "outOfStock": "Out of stock"
+    },
+    "gender": {
+      "men": "Men",
+      "women": "Women",
+      "unisex": "Unisex"
+    },
+    "khalijiFrangrance": {
+      "hero": {
+        "title": "Discover the Art of Oriental Perfumes",
+        "subtitle": "Explore our exclusive collection of perfumes and beauty products inspired by the ancestral traditions of the Gulf."
+      },
+      "searchPlaceholder": "Search for a perfume, a note, a brand...",
+      "categories": {
+        "perfumes": {
+          "title": "Oriental Perfumes",
+          "description": "Exquisite fragrances with notes of oud, saffron, rose and amber for men and women."
+        },
+        "incense": {
+          "title": "Traditional Incense",
+          "description": "Traditional incense, bakhoor and burners to perfume your interior in the Gulf tradition."
+        },
+        "accessories": {
+          "title": "Perfumery Accessories",
+          "description": "Incense burners, gift sets and accessories for a complete fragrance experience."
+        }
+      },
+      "specialOffers": "Special Offers",
+      "topRated": "Top Rated",
+      "heritage": {
+        "title": "The Heritage of Gulf Perfumes",
+        "paragraph1": "Gulf perfumes are renowned worldwide for their richness, complexity and longevity. For centuries, the inhabitants of the Arabian Peninsula have perfected the art of perfumery.",
+        "paragraph2": "Oud, also known as agarwood, is one of the most precious and emblematic ingredients in oriental perfumery. Its woody, warm and slightly sweet aroma is at the heart of many compositions.",
+        "paragraph3": "At Khaliji Fragrance, we offer you a selection of the best perfumes and beauty products inspired by this ancestral tradition, adapted to contemporary tastes."
+      },
+      "partners": "Our Partner Brands",
+      "blog": {
+        "title": "Beauty & Perfumery Tips",
+        "article1": {
+          "title": "How to Choose Your Oriental Perfume",
+          "description": "Complete guide to selecting the oriental perfume that matches your personality..."
+        },
+        "article2": {
+          "title": "Beauty Secrets of Gulf Women",
+          "description": "Discover the ancestral beauty rituals that make Middle Eastern women famous..."
+        }
+      },
+      "newsletter": {
+        "title": "Stay informed",
+        "description": "Sign up for our newsletter to receive our exclusive offers and perfumery tips"
+      }
+    }
+  },
+  "ar": {
+    "common": {
+      "home": "الرئيسية",
+      "search": "بحث",
+      "explore": "استكشاف",
+      "seeAll": "عرض الكل",
+      "addToCart": "أضف إلى السلة",
+      "viewOffer": "عرض العرض",
+      "backToHome": "العودة إلى الرئيسية",
+      "readMore": "قراءة المزيد",
+      "subscribe": "اشتراك",
+      "yourEmail": "عنوان بريدك الإلكتروني"
+    },
+    "navigation": {
+      "home": "الرئيسية",
+      "khalijiFrangrance": "خليجي فراجرانس",
+      "khalijiModel": "خليجي موديل",
+      "khalijiHiTech": "خليجي هاي تك",
+      "about": "من نحن",
+      "contact": "اتصل بنا",
+      "blog": "المدونة"
+    },
+    "categories": {
+      "perfumes": "العطور",
+      "incense": "البخور والعود",
+      "accessories": "الإكسسوارات",
+      "all": "جميع المنتجات"
+    },
+    "productDetails": {
+      "description": "الوصف",
+      "specifications": "المواصفات",
+      "reviews": "التقييمات",
+      "relatedProducts": "منتجات مشابهة",
+      "brand": "العلامة التجارية",
+      "volume": "الحجم",
+      "gender": "الجنس",
+      "notes": "النوتات",
+      "rating": "التقييم",
+      "price": "السعر",
+      "originalPrice": "السعر الأصلي",
+      "discount": "الخصم",
+      "inStock": "متوفر",
+      "outOfStock": "غير متوفر"
+    },
+    "gender": {
+      "men": "رجال",
+      "women": "نساء",
+      "unisex": "للجنسين"
+    },
+    "khalijiFrangrance": {
+      "hero": {
+        "title": "اكتشف فن العطور الشرقية",
+        "subtitle": "استكشف مجموعتنا الحصرية من العطور ومنتجات الجمال المستوحاة من التقاليد العريقة للخليج."
+      },
+      "searchPlaceholder": "ابحث عن عطر، نوتة، علامة تجارية...",
+      "categories": {
+        "perfumes": {
+          "title": "العطور الشرقية",
+          "description": "عطور فاخرة بنوتات العود والزعفران والورد والعنبر للرجال والنساء."
+        },
+        "incense": {
+          "title": "البخور التقليدي",
+          "description": "البخور التقليدي والعود والمباخر لتعطير منزلك على الطريقة الخليجية."
+        },
+        "accessories": {
+          "title": "إكسسوارات العطور",
+          "description": "مباخر، مجموعات هدايا وإكسسوارات لتجربة عطرية متكاملة."
+        }
+      },
+      "specialOffers": "عروض خاصة",
+      "topRated": "الأعلى تقييماً",
+      "heritage": {
+        "title": "تراث عطور الخليج",
+        "paragraph1": "تشتهر عطور الخليج في جميع أنحاء العالم بثرائها وتعقيدها وثباتها. على مر القرون، أتقن سكان شبه الجزيرة العربية فن صناعة العطور.",
+        "paragraph2": "العود، المعروف أيضًا باسم خشب العود، هو أحد أثمن وأشهر المكونات في العطور الشرقية. رائحته الخشبية الدافئة والحلوة قليلاً هي في قلب العديد من التركيبات.",
+        "paragraph3": "في خليجي فراجرانس، نقدم لك مجموعة مختارة من أفضل العطور ومنتجات الجمال المستوحاة من هذا التقليد العريق، والمتكيفة مع الأذواق المعاصرة."
+      },
+      "partners": "علاماتنا التجارية الشريكة",
+      "blog": {
+        "title": "نصائح الجمال والعطور",
+        "article1": {
+          "title": "كيفية اختيار عطرك الشرقي",
+          "description": "دليل كامل لاختيار العطر الشرقي الذي يناسب شخصيتك..."
+        },
+        "article2": {
+          "title": "أسرار جمال نساء الخليج",
+          "description": "اكتشف طقوس الجمال العريقة التي تشتهر بها نساء الشرق الأوسط..."
+        }
+      },
+      "newsletter": {
+        "title": "ابق على اطلاع",
+        "description": "اشترك في نشرتنا الإخبارية لتلقي عروضنا الحصرية ونصائح العطور"
+      }
+    }
+  }
+}
