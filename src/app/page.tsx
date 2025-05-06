@@ -1,3 +1,4 @@
+// Adding a comment to trigger rebuild
 import MinimalClientComponent from '@/components/MinimalClientComponent';
 
 // Server component rendering the minimal client component
@@ -9,3 +10,4 @@ export default function Home() {
     </div>
   );
 }
+
