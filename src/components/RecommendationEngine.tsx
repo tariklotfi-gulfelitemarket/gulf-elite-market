@@ -1,6 +1,9 @@
+
+'use client';
+
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { useLocale } from '@/hooks/useLocale';
+// import { useRouter } from 'next/router'; // Not used, can be removed
+// import { useLocale } from '@/hooks/useLocale'; // Removed i18n hook
 
 interface RecommendationEngineProps {
   currentProductId?: string;
@@ -10,6 +13,14 @@ interface RecommendationEngineProps {
   children: React.ReactNode;
 }
 
+interface ProductRecommendation {
+  id: string;
+  // Add other potential product properties if needed for display
+  title?: string;
+  imageUrl?: string;
+  price?: number;
+}
+
 export default function RecommendationEngine({
   currentProductId,
   currentCategory,
@@ -17,11 +28,12 @@ export default function RecommendationEngine({
   maxRecommendations = 4,
   children
 }: RecommendationEngineProps) {
-  const [recommendations, setRecommendations] = useState<any[]>([]);
+  const [recommendations, setRecommendations] = useState<ProductRecommendation[]>([]);
   const [userPreferences, setUserPreferences] = useState<any>(null);
   const [initialized, setInitialized] = useState(false);
-  const { locale } = useLocale();
-  
+  // const { locale } = useLocale(); // Removed i18n hook usage
+  const locale = 'en'; // Default locale to 'en' for now
+
   // Initialiser le moteur de recommandation
   useEffect(() => {
     if (typeof window !== 'undefined' && !initialized) {
@@ -31,17 +43,21 @@ export default function RecommendationEngine({
       const affiliateClicks = JSON.parse(localStorage.getItem('affiliateClicks') || '[]');
       const wishlistActions = JSON.parse(localStorage.getItem('wishlistActions') || '[]');
       const productComparisons = JSON.parse(localStorage.getItem('productComparisons') || '[]');
-      
+
       // Analyser les préférences utilisateur
       const preferences = analyzeUserPreferences(pageViews, productImpressions, affiliateClicks, wishlistActions, productComparisons);
       setUserPreferences(preferences);
-      
+
       // Générer des recommandations basées sur les préférences
+      // Simulating fetching product details for recommendations
       const recs = generateRecommendations(preferences, currentProductId, currentCategory, currentPlatform, maxRecommendations);
-      setRecommendations(recs);
-      
+      // In a real app, fetch full product details based on IDs in 'recs'
+      const detailedRecs: ProductRecommendation[] = recs.map(id => ({ id })); // Placeholder
+      setRecommendations(detailedRecs);
+
       setInitialized(true);
     }
+    // Removed locale from dependency array
   }, [initialized, currentProductId, currentCategory, currentPlatform, maxRecommendations]);
 
   // Analyser les préférences utilisateur
@@ -54,7 +70,7 @@ export default function RecommendationEngine({
         categoryVisits[category] = (categoryVisits[category] || 0) + 1;
       }
     });
-    
+
     // Plateformes préférées
     const platformClicks: Record<string, number> = {};
     affiliateClicks.forEach(click => {
@@ -63,7 +79,7 @@ export default function RecommendationEngine({
         platformClicks[platform] = (platformClicks[platform] || 0) + 1;
       }
     });
-    
+
     // Gammes de prix
     const priceRanges: Record<string, number> = {
       'budget': 0,
@@ -71,7 +87,7 @@ export default function RecommendationEngine({
       'premium': 0,
       'luxury': 0
     };
-    
+
     affiliateClicks.forEach(click => {
       const price = parseFloat(click.price);
       if (!isNaN(price)) {
@@ -81,32 +97,32 @@ export default function RecommendationEngine({
         else priceRanges['luxury']++;
       }
     });
-    
+
     // Produits sauvegardés
     const savedProducts = wishlistActions
       .filter(action => action.action === 'add')
       .map(action => action.productId);
-    
+
     // Produits comparés
     const comparedProducts = productComparisons
       .filter(action => action.action === 'add')
       .map(action => action.productId);
-    
+
     // Déterminer les catégories préférées
     const preferredCategories = Object.entries(categoryVisits)
       .sort(([_, countA], [__, countB]) => countB - countA)
       .map(([category, _]) => category);
-    
+
     // Déterminer les plateformes préférées
     const preferredPlatforms = Object.entries(platformClicks)
       .sort(([_, countA], [__, countB]) => countB - countA)
       .map(([platform, _]) => platform);
-    
+
     // Déterminer la gamme de prix préférée
     const preferredPriceRange = Object.entries(priceRanges)
       .sort(([_, countA], [__, countB]) => countB - countA)
       .map(([range, _]) => range)[0];
-    
+
     return {
       preferredCategories,
       preferredPlatforms,
@@ -117,85 +133,76 @@ export default function RecommendationEngine({
     };
   };
 
-  // Générer des recommandations basées sur les préférences utilisateur
+  // Générer des recommandations basées sur les préférences utilisateur (returns only IDs)
   const generateRecommendations = (
     preferences: any,
     currentProductId?: string,
     currentCategory?: string,
     currentPlatform?: string,
     maxRecommendations: number = 4
-  ) => {
+  ): string[] => {
     if (!preferences) return [];
-    
-    // Récupérer les produits les plus performants
-    const topProducts = JSON.parse(localStorage.getItem('topPerformingProducts') || '[]');
-    
-    // Récupérer les données d'analyse des conversions
+
+    // Récupérer les produits les plus performants (simulated)
+    const topProducts: string[] = JSON.parse(localStorage.getItem('topPerformingProducts') || '[]');
+
+    // Récupérer les données d'analyse des conversions (simulated)
     const conversionAnalysis = JSON.parse(localStorage.getItem('conversionAnalysis') || '{}');
-    
-    // Récupérer les produits par catégorie
-    let recommendedProducts: any[] = [];
-    
+
+    let recommendedProductIds: string[] = [];
+
     // Priorité 1: Recommander des produits de la même catégorie que celle actuellement consultée
     if (currentCategory) {
-      // Simuler la récupération de produits de la même catégorie
-      // Dans une implémentation réelle, cela viendrait d'une API ou d'une base de données
       const categoryProducts = topProducts
         .filter((productId: string) => {
-          // Vérifier si le produit appartient à la catégorie actuelle
-          // Ceci est une simulation, dans un cas réel nous aurions une vraie vérification
+          // Simulate checking if product belongs to currentCategory
           return Math.random() > 0.5 && productId !== currentProductId;
         })
         .slice(0, 2);
-      
-      recommendedProducts = [...recommendedProducts, ...categoryProducts];
+      recommendedProductIds = [...recommendedProductIds, ...categoryProducts];
     }
-    
+
     // Priorité 2: Recommander des produits des catégories préférées de l'utilisateur
     if (preferences.preferredCategories && preferences.preferredCategories.length > 0) {
       const preferredCategoryProducts = topProducts
         .filter((productId: string) => {
-          // Vérifier si le produit appartient aux catégories préférées
-          // Ceci est une simulation, dans un cas réel nous aurions une vraie vérification
-          return Math.random() > 0.3 && productId !== currentProductId && !recommendedProducts.includes(productId);
+           // Simulate checking if product belongs to preferred categories
+          return Math.random() > 0.3 && productId !== currentProductId && !recommendedProductIds.includes(productId);
         })
         .slice(0, 2);
-      
-      recommendedProducts = [...recommendedProducts, ...preferredCategoryProducts];
+      recommendedProductIds = [...recommendedProductIds, ...preferredCategoryProducts];
     }
-    
+
     // Priorité 3: Recommander des produits des plateformes préférées de l'utilisateur
     if (preferences.preferredPlatforms && preferences.preferredPlatforms.length > 0) {
       const preferredPlatformProducts = topProducts
         .filter((productId: string) => {
-          // Vérifier si le produit appartient aux plateformes préférées
-          // Ceci est une simulation, dans un cas réel nous aurions une vraie vérification
-          return Math.random() > 0.4 && productId !== currentProductId && !recommendedProducts.includes(productId);
+          // Simulate checking if product is from preferred platforms
+          return Math.random() > 0.4 && productId !== currentProductId && !recommendedProductIds.includes(productId);
         })
         .slice(0, 1);
-      
-      recommendedProducts = [...recommendedProducts, ...preferredPlatformProducts];
+      recommendedProductIds = [...recommendedProductIds, ...preferredPlatformProducts];
     }
-    
+
     // Compléter avec les produits les plus performants si nécessaire
-    if (recommendedProducts.length < maxRecommendations) {
-      const remainingCount = maxRecommendations - recommendedProducts.length;
+    if (recommendedProductIds.length < maxRecommendations) {
+      const remainingCount = maxRecommendations - recommendedProductIds.length;
       const additionalProducts = topProducts
         .filter((productId: string) => {
-          return productId !== currentProductId && !recommendedProducts.includes(productId);
+          return productId !== currentProductId && !recommendedProductIds.includes(productId);
         })
         .slice(0, remainingCount);
-      
-      recommendedProducts = [...recommendedProducts, ...additionalProducts];
+      recommendedProductIds = [...recommendedProductIds, ...additionalProducts];
     }
-    
+
     // Limiter au nombre maximum de recommandations
-    return recommendedProducts.slice(0, maxRecommendations);
+    return recommendedProductIds.slice(0, maxRecommendations);
   };
 
-  // Passer les recommandations aux composants enfants
+  // Passer les recommandations (avec détails simulés) aux composants enfants
   const childrenWithProps = React.Children.map(children, child => {
     if (React.isValidElement(child)) {
+      // Pass the recommendations array (currently just IDs, needs fetching details)
       return React.cloneElement(child, { recommendations });
     }
     return child;
@@ -203,3 +210,4 @@ export default function RecommendationEngine({
 
   return <>{childrenWithProps}</>;
 }
+

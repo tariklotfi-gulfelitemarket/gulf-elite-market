@@ -1,9 +1,11 @@
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AffiliateButton from './AffiliateButton';
-import { useLocale } from '@/hooks/useLocale';
-import { useTranslations } from '@/hooks/useTranslations';
+// import { useLocale } from '@/hooks/useLocale'; // Removed i18n hook
+// import { useTranslations } from '@/hooks/useTranslations'; // Removed i18n hook
 
 interface ProductCardProps {
   id: string;
@@ -36,9 +38,11 @@ export default function ProductCard({
   buttonColor = 'bg-blue-600 hover:bg-blue-700',
   className = ''
 }: ProductCardProps) {
-  const { locale } = useLocale();
-  const t = useTranslations();
-  const isRTL = locale === 'ar';
+  // const { locale } = useLocale(); // Removed i18n hook usage
+  // const t = useTranslations(); // Removed i18n hook usage
+  const locale = 'en'; // Default locale to 'en' for now
+  const t = (key: string) => key.split('.').pop() || key; // Simple placeholder for translation
+  const isRTL = false; // Default RTL to false for now
   const [isHighlighted, setIsHighlighted] = useState(false);
   const [showQuickView, setShowQuickView] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -65,7 +69,7 @@ export default function ProductCard({
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Vérifier si ce produit est parmi les plus performants
-      const topProducts = JSON.parse(localStorage.getItem('topPerformingProducts') || '[]');
+      const topProducts = JSON.parse(localStorage.getItem('topPerformingProducts') || '[]");
       const isTopProduct = topProducts.includes(id);
       
       // Mettre en évidence les produits les plus performants
@@ -89,7 +93,7 @@ export default function ProductCard({
         path: window.location.pathname
       };
       
-      const existingImpressions = JSON.parse(localStorage.getItem('productImpressions') || '[]');
+      const existingImpressions = JSON.parse(localStorage.getItem('productImpressions') || '[]");
       const alreadyImpressed = existingImpressions.some((imp: any) => 
         imp.productId === id && imp.path === window.location.pathname
       );
@@ -116,7 +120,7 @@ export default function ProductCard({
         timestamp: new Date().toISOString()
       };
       
-      const existingWishlist = JSON.parse(localStorage.getItem('wishlistActions') || '[]');
+      const existingWishlist = JSON.parse(localStorage.getItem('wishlistActions') || '[]");
       existingWishlist.push(wishlistData);
       localStorage.setItem('wishlistActions', JSON.stringify(existingWishlist.slice(-100)));
     }
@@ -138,7 +142,7 @@ export default function ProductCard({
         timestamp: new Date().toISOString()
       };
       
-      const existingCompares = JSON.parse(localStorage.getItem('productComparisons') || '[]');
+      const existingCompares = JSON.parse(localStorage.getItem('productComparisons') || '[]");
       existingCompares.push(compareData);
       localStorage.setItem('productComparisons', JSON.stringify(existingCompares.slice(-100)));
     }
@@ -159,7 +163,7 @@ export default function ProductCard({
         timestamp: new Date().toISOString()
       };
       
-      const existingQuickViews = JSON.parse(localStorage.getItem('quickViews') || '[]');
+      const existingQuickViews = JSON.parse(localStorage.getItem('quickViews') || '[]");
       existingQuickViews.push(quickViewData);
       localStorage.setItem('quickViews', JSON.stringify(existingQuickViews.slice(-100)));
     }
@@ -185,7 +189,7 @@ export default function ProductCard({
       {/* Badge de produit populaire */}
       {isHighlighted && (
         <div className="absolute top-2 right-2 z-10 bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-          {locale === 'fr' ? 'Populaire' : locale === 'ar' ? 'شائع' : 'Popular'}
+          {locale === 'fr' ? 'Populaire' : locale === 'ar' ? 'شائع' : 'Popular'} {/* Kept conditional text for now, defaulting to 'Popular' */}
         </div>
       )}
       
@@ -201,7 +205,7 @@ export default function ProductCard({
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gray-200">
-            <span className="text-gray-400">{t('common.noImage')}</span>
+            <span className="text-gray-400">{t('common.noImage') === 'noImage' ? 'No Image Available' : t('common.noImage')}</span> {/* Placeholder text */}
           </div>
         )}
         
@@ -280,7 +284,7 @@ export default function ProductCard({
         {/* Compteur de vues */}
         {viewCount !== null && (
           <div className="absolute bottom-2 left-2 bg-white bg-opacity-80 text-xs text-gray-700 px-2 py-1 rounded-full">
-            {viewCount} {locale === 'fr' ? 'personnes consultent' : locale === 'ar' ? 'يشاهدون' : 'people viewing'}
+            {viewCount} {locale === 'fr' ? 'personnes consultent' : locale === 'ar' ? 'يشاهدون' : 'people viewing'} {/* Kept conditional text for now, defaulting to 'people viewing' */}
           </div>
         )}
       </div>
@@ -378,7 +382,7 @@ export default function ProductCard({
                   />
                 ) : (
                   <div className="w-full h-64 flex items-center justify-center bg-gray-200">
-                    <span className="text-gray-400">{t('common.noImage')}</span>
+                    <span className="text-gray-400">{t('common.noImage') === 'noImage' ? 'No Image Available' : t('common.noImage')}</span> {/* Placeholder text */}
                   </div>
                 )}
               </div>
@@ -416,107 +420,12 @@ export default function ProductCard({
                 
                 <p className="text-gray-600 mb-6">{description}</p>
                 
-                <div className="mb-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-gray-700">
-                      {locale === 'fr' ? 'Plateforme' : locale === 'ar' ? 'منصة' : 'Platform'}:
-                    </span>
-                    <span className="text-sm text-gray-600">
-                      {platform === 'amazon' && 'Amazon'}
-                      {platform === 'noon' && 'Noon'}
-                      {platform === 'sharafdg' && 'Sharaf DG'}
-                      {platform === 'virginmegastore' && 'Virgin Megastore'}
-                      {platform === 'ounass' && 'Ounass'}
-                      {platform === 'themodist' && 'The Modist'}
-                      {platform === 'namshi' && 'Namshi'}
-                      {platform === 'farfetch' && 'Farfetch'}
-                    </span>
-                  </div>
-                  
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm font-medium text-gray-700">
-                      {locale === 'fr' ? 'Catégorie' : locale === 'ar' ? 'فئة' : 'Category'}:
-                    </span>
-                    <span className="text-sm text-gray-600">
-                      {category}
-                    </span>
-                  </div>
-                  
-                  {viewCount !== null && (
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-sm font-medium text-gray-700">
-                        {locale === 'fr' ? 'Popularité' : locale === 'ar' ? 'شعبية' : 'Popularity'}:
-                      </span>
-                      <span className="text-sm text-gray-600">
-                        {viewCount} {locale === 'fr' ? 'vues aujourd\'hui' : locale === 'ar' ? 'مشاهدات اليوم' : 'views today'}
-                      </span>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="flex gap-4 mb-6">
-                  <button 
-                    onClick={handleWishlist}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${
-                      isWishlisted ? 'bg-red-50 border-red-200 text-red-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    <svg 
-                      className={`w-5 h-5 ${isWishlisted ? 'text-red-500' : 'text-gray-600'}`} 
-                      fill={isWishlisted ? "currentColor" : "none"} 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24" 
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth="2" 
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
-                    </svg>
-                    <span>
-                      {isWishlisted 
-                        ? (locale === 'fr' ? 'Sauvegardé' : locale === 'ar' ? 'تم الحفظ' : 'Saved') 
-                        : (locale === 'fr' ? 'Sauvegarder' : locale === 'ar' ? 'حفظ' : 'Save')}
-                    </span>
-                  </button>
-                  
-                  <button 
-                    onClick={handleCompare}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg border ${
-                      isCompared ? 'bg-blue-50 border-blue-200 text-blue-600' : 'border-gray-300 text-gray-700 hover:bg-gray-50'
-                    }`}
-                  >
-                    <svg 
-                      className={`w-5 h-5 ${isCompared ? 'text-blue-500' : 'text-gray-600'}`} 
-                      fill="none" 
-                      stroke="currentColor" 
-                      viewBox="0 0 24 24" 
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path 
-                        strokeLinecap="round" 
-                        strokeLinejoin="round" 
-                        strokeWidth="2" 
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                      />
-                    </svg>
-                    <span>
-                      {isCompared 
-                        ? (locale === 'fr' ? 'Comparé' : locale === 'ar' ? 'تمت المقارنة' : 'Compared') 
-                        : (locale === 'fr' ? 'Comparer' : locale === 'ar' ? 'مقارنة' : 'Compare')}
-                    </span>
-                  </button>
-                </div>
-                
                 <AffiliateButton
                   productId={id}
                   platform={platform}
                   category={category}
                   price={price}
                   buttonColor={buttonColor}
-                  buttonText={locale === 'fr' ? 'Acheter maintenant' : locale === 'ar' ? 'اشتري الآن' : 'Buy Now'}
                 />
               </div>
             </div>
@@ -526,3 +435,4 @@ export default function ProductCard({
     </div>
   );
 }
+

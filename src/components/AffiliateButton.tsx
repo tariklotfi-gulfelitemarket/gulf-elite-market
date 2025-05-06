@@ -1,6 +1,9 @@
+
+'use client';
+
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useLocale } from '@/hooks/useLocale';
+// import { useLocale } from '@/hooks/useLocale'; // Removed i18n hook
 
 interface AffiliateButtonProps {
   productId: string;
@@ -18,20 +21,22 @@ export default function AffiliateButton({
   category,
   price,
   className = '',
-  buttonText = 'Acheter maintenant',
+  buttonText = 'Acheter maintenant', // Default text, will be localized below if possible
   buttonColor = 'bg-blue-600 hover:bg-blue-700'
 }: AffiliateButtonProps) {
   const router = useRouter();
-  const { locale } = useLocale();
+  // const { locale } = useLocale(); // Removed i18n hook usage
+  const locale = 'en'; // Default locale to 'en' for now
   const [optimized, setOptimized] = useState(false);
   const [urgencyMessage, setUrgencyMessage] = useState<string | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const [countdown, setCountdown] = useState<number | null>(null);
-  
-  // Traduire le texte du bouton en fonction de la langue
+
+  // Traduire le texte du bouton en fonction de la langue (placeholder)
   const getLocalizedButtonText = () => {
     if (locale === 'en') return buttonText === 'Acheter maintenant' ? 'Buy Now' : buttonText;
     if (locale === 'ar') return buttonText === 'Acheter maintenant' ? 'اشتري الآن' : buttonText;
+    // Default to French or original if not 'Acheter maintenant'
     return buttonText;
   };
 
@@ -41,27 +46,28 @@ export default function AffiliateButton({
       // Vérifier si ce produit est parmi les plus performants
       const topProducts = JSON.parse(localStorage.getItem('topPerformingProducts') || '[]');
       const isTopProduct = topProducts.includes(productId);
-      
+
       // Vérifier si cette plateforme est parmi les plus performantes
       const preferredPlatforms = JSON.parse(localStorage.getItem('preferredPlatforms') || '[]');
       const isPreferredPlatform = preferredPlatforms.length > 0 && preferredPlatforms[0] === platform;
-      
+
       // Appliquer des optimisations si le produit ou la plateforme est performant
       if (isTopProduct || isPreferredPlatform) {
         setOptimized(true);
-        
-        // Ajouter un message d'urgence pour les produits populaires
+
+        // Ajouter un message d'urgence pour les produits populaires (placeholder)
         if (isTopProduct) {
           const messages = {
             fr: ['Très populaire', 'Presque épuisé', 'Offre limitée'],
             en: ['Very popular', 'Almost sold out', 'Limited offer'],
             ar: ['شعبية كبيرة', 'على وشك النفاد', 'عرض محدود']
           };
-          
+
           const randomIndex = Math.floor(Math.random() * 3);
-          setUrgencyMessage(messages[locale as keyof typeof messages][randomIndex]);
+          // Use 'en' as default locale for message
+          setUrgencyMessage(messages['en'][randomIndex]);
         }
-        
+
         // Ajouter un compte à rebours pour créer un sentiment d'urgence
         if (Math.random() > 0.5) {
           const randomHours = Math.floor(Math.random() * 24) + 1;
@@ -74,7 +80,7 @@ export default function AffiliateButton({
   // Gérer le clic sur le bouton d'affiliation
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
-    
+
     // Enregistrer le clic pour l'analyse des conversions
     if (typeof window !== 'undefined') {
       const clickData = {
@@ -86,22 +92,22 @@ export default function AffiliateButton({
         path: window.location.pathname,
         optimized: optimized
       };
-      
+
       const existingClicks = JSON.parse(localStorage.getItem('affiliateClicks') || '[]');
       existingClicks.push(clickData);
       localStorage.setItem('affiliateClicks', JSON.stringify(existingClicks.slice(-100)));
     }
-    
+
     // Afficher une popup de confirmation pour augmenter l'engagement
     setShowPopup(true);
-    
+
     // Rediriger vers la plateforme d'affiliation après un court délai
     setTimeout(() => {
       setShowPopup(false);
-      
+
       // Construire l'URL d'affiliation en fonction de la plateforme
       let affiliateUrl = '';
-      
+
       switch (platform) {
         case 'amazon':
           affiliateUrl = `https://www.amazon.ae/dp/${productId}?tag=gulfelitemarket-21`;
@@ -130,7 +136,7 @@ export default function AffiliateButton({
         default:
           affiliateUrl = `https://www.gulfelitemarket.com/redirect?product=${productId}&platform=${platform}`;
       }
-      
+
       // Ouvrir l'URL dans un nouvel onglet
       window.open(affiliateUrl, '_blank');
     }, 1500);
@@ -151,24 +157,23 @@ export default function AffiliateButton({
       >
         {getLocalizedButtonText()}
       </button>
-      
+
       {/* Message d'urgence pour créer un sentiment de rareté */}
       {urgencyMessage && (
         <div className="mt-2 text-center text-red-600 text-sm font-semibold animate-pulse">
           {urgencyMessage}
         </div>
       )}
-      
-      {/* Compte à rebours pour créer un sentiment d'urgence */}
+
+      {/* Compte à rebours pour créer un sentiment d'urgence (placeholder) */}
       {countdown !== null && (
         <div className="mt-2 text-center text-gray-600 text-xs">
-          {locale === 'fr' && `Offre expire dans ${countdown} heures`}
-          {locale === 'en' && `Offer expires in ${countdown} hours`}
-          {locale === 'ar' && `العرض ينتهي خلال ${countdown} ساعات`}
+          {/* Use 'en' as default locale for countdown message */}
+          {`Offer expires in ${countdown} hours`}
         </div>
       )}
-      
-      {/* Popup de confirmation */}
+
+      {/* Popup de confirmation (placeholder) */}
       {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <div className="bg-white rounded-lg p-6 max-w-md mx-4 shadow-xl transform transition-all animate-bounce">
@@ -179,15 +184,13 @@ export default function AffiliateButton({
                 </svg>
               </div>
               <h3 className="text-lg leading-6 font-medium text-gray-900 mt-4">
-                {locale === 'fr' && 'Excellent choix !'}
-                {locale === 'en' && 'Excellent choice!'}
-                {locale === 'ar' && 'اختيار ممتاز!'}
+                {/* Use 'en' as default locale for popup title */}
+                {'Excellent choice!'}
               </h3>
               <div className="mt-2">
                 <p className="text-sm text-gray-500">
-                  {locale === 'fr' && 'Vous êtes redirigé vers notre partenaire...'}
-                  {locale === 'en' && 'You are being redirected to our partner...'}
-                  {locale === 'ar' && 'يتم توجيهك إلى شريكنا...'}
+                  {/* Use 'en' as default locale for popup message */}
+                  {'You are being redirected to our partner...'}
                 </p>
               </div>
             </div>
@@ -197,3 +200,4 @@ export default function AffiliateButton({
     </div>
   );
 }
+
